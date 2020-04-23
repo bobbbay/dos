@@ -1,4 +1,4 @@
 install:
-	chmod u+x && ./install.sh
+	bash install.sh
 update:
-	git pull origin master && chmod u+x && ./install.sh
+	git pull origin master && bash install.sh
