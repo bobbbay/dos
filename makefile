@@ -1,4 +1,4 @@
 install:
-	bash install.sh
+	@bash install.sh
 update:
-	git pull origin master && bash install.sh
+	@git pull origin master && bash install.sh
