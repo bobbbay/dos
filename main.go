@@ -84,10 +84,47 @@ func(d DDoS) Result()(successRequest, amountRequests int64) {
   return d.successRequest, d.amountRequests
 }
 
+type block struct {
+	try     func()
+	catch   func(exception)
+	finally func()
+}
+
+type exception interface{}
+
+func throw(up exception) {
+	panic(up)
+}
+
+func (tcf block) do() {
+	if tcf.finally != nil {
+		defer tcf.finally()
+	}
+	if tcf.catch != nil {
+		defer func() {
+			if r := recover(); r != nil {
+				tcf.catch(r)
+			}
+		}()
+	}
+	tcf.try()
+}
 
 func main() {
-  target := os.Args[1]
-  workers, _ := strconv.Atoi(os.Args[2])
+  target := ""
+  workers := 0
+  block{
+    try: func() {
+      target = os.Args[1]
+      workers, _ = strconv.Atoi(os.Args[2])
+    },
+    catch: func(e exception) {
+	  //fmt.Printf("Caught %v\n", e)
+	  fmt.Printf("Please add <host> and <amount>.\n")
+	  os.Exit(1)
+    },
+    finally: func() {},
+  }.do()
 
   d, err := New(target, workers)
   if err != nil {
