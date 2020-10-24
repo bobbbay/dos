@@ -134,5 +134,13 @@ func main() {
   time.Sleep(time.Second)
   d.Stop()
   fmt.Println("\nSuccessfully DDoS'd server.")
+
+  // Check if site is up
+  resp, err := http.Get(target)
+  if err != nil {
+    print(err.Error())
+  } else {
+    print(string(resp.StatusCode) + resp.Status)
+  }
   // Output: DDoS attack server: http://127.0.0.1:80
 }
