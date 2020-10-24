@@ -7,14 +7,9 @@ This is a tool only meant for pen testing. What you do with this tool is up to y
 # Install
 ```
 git clone https://github.com/Bobbbay/dos.git
-```
-```
 cd dos
-```
-```
+make
 make install
-# --- or ---
-bash install.sh
 ```
 
 # Use
@@ -25,9 +20,6 @@ dos <target URL> <workers INT>
 # Update
 ```
 make update
-# --- or ---
-git pull origin master
-bash install.sh
 ```
 
 # Contribute
