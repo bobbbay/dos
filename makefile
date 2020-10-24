@@ -3,6 +3,6 @@ build:
 	go build .
 	@echo -e "\e[32m\e[1m!\e[0m\e[32m Installation Complete! Run `make install` to complete the installation.\e[0m"
 install:
-	ls /usr/bin/dos || cp ./dos /usr/bin/dos
+	cp ./dos /usr/bin/dos
 update:
 	@git pull origin master && make && make install
